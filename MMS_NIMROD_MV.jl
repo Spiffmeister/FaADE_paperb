@@ -78,9 +78,6 @@ for order in [2, 4]
         k_para = 10^EXP
 
         rel_error = []
-        # rel_error2 = []
-        # abs_error1 = []
-        # abs_error2 = []
 
         for I in eachindex(Nx) # Grid loop
             @show EXP, I, Nx[I]
@@ -141,13 +138,10 @@ for order in [2, 4]
 
             push!(rel_error, RE)
 
-            # pollution
-            # push!(poll, abs(1.0 - soln.u[2][end,floor(Int,ny/2)-1]))
 
         end
 
         dictout[string("rel ", EXP)] = rel_error
-        # dictout[string("poll ",EXP)] = poll
 
     end
 

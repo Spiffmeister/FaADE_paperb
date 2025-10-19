@@ -102,7 +102,6 @@ for (fi, filepath) in enumerate(filepaths)
     ylims!(0.0, 0.004)
 
     text!(axf[fi], 0, 1, text=L"%$(EXP[fi])", space=:relative, align=(:left, :top), offset=(1, 0), fontsize=22)
-    # axislegend(axf[fi])
     if fi == 1
         Legend(f[1, 2], li, string.([Doms[I].Grids[4].nx for I in 1:3]))
     end
@@ -139,7 +138,6 @@ poinrtheta = hcat([BtoX(poindata.ψ[I], poindata.θ[I]) for I in eachindex(poind
 
 
 g = Figure(size=(8, 7) .* 120, fontsize=16)
-# axg = Axis(g[1,1], xlabel="x", ylabel="y", aspect=DataAspect())
 axg = Axis(g[1, 1], xlabel="x", ylabel="y")
 
 file = jldopen(string(filepaths[2], "/ref"))
@@ -156,18 +154,6 @@ gridy = gridy[gridy.≥-1e-11]
 tcf = tricontourf!(axg, gridx, gridy, utot, levels=0.0:0.002/10:0.002)
 
 
-# file = jldopen(string(filepaths[2],"/ref"))
-# reference_u = file["reference_u"]
-
-# gridx = vcat([reference_Dom.Grids[I].gridx for I in 1:5]...)[:]
-# gridy = vcat([reference_Dom.Grids[I].gridy for I in 1:5]...)[:]
-# utot = vcat(reference_u...)[:]
-
-# utot = utot[gridy .≤ 1e-11]
-# gridx = gridx[gridy .≤ 1e-11]
-# gridy = gridy[gridy .≤ 1e-11]
-
-# tcf = tricontourf!(axg, gridx, gridy, utot, levels=0.0:0.002/10:0.002)
 
 Colorbar(g[1, 2], tcf, height=Relative(0.9), label=L"u(x,y,t_f)", labelsize=18)
 
@@ -199,7 +185,6 @@ function reconstruct_soln(Dom, refinterp)
     soln = [zeros(Dom.Grids[I].nx, Dom.Grids[I].ny) for I in 1:5]
     for I in eachindex(Dom.Grids)
         for J in eachindex(Dom.Grids[I].gridx)
-            # soln[I][J] = evaluate(refinterp[I],[Dom.Grids[I][J]...])[1]
             soln[I][J] = refinterp[I](tuple(Dom.Grids[I][J]...))
         end
     end
@@ -230,15 +215,10 @@ solns_u = file["solns_u"]
 
 soln_ref = reconstruct_soln(Doms[5], refinterp)
 
-# soln_err = [abs.(solns) for solns in soln_ref .- solns_u[5]]/abs(maximum(maximum.([abs.(solns) for solns in soln_ref .- solns_u[5]])))
 
 soln_err = [abs.(solns) for solns in soln_ref .- solns_u[5]] / compute_errors(solns_u[5], soln_ref, Doms[5])
 
 
-# h = Figure(fontsize=18, size=(10,5).*120)
-# axh = Axis(h[1,1], xlabel="x", ylabel="y", aspect=DataAspect())
-
-# axh = Axis(g[2,1], xlabel="x", ylabel="y", aspect=DataAspect())
 axh = Axis(g[2, 1], xlabel="x", ylabel="y")
 
 cmap1 = minimum(minimum.(soln_err)), maximum(maximum.(soln_err))
@@ -247,7 +227,6 @@ cmap1 = minimum(minimum.(soln_err)), maximum(maximum.(soln_err))
 for I in 1:5
     surface!(axh, Doms[5].Grids[I].gridx, Doms[5].Grids[I].gridy, soln_err[I], colorrange=cmap1, colorscale=log)
 end
-# Colorbar(h[1,2], limits=cmap1, label=L"\log\left((u_{ref} - u)/\max(u_{ref} - u)\right)",height=Relative(0.95))
 Colorbar(g[2, 2], limits=cmap1, label=L"\log\left((u_{ref} - u)/||u_{ref}||_H\right)", height=Relative(0.95))
 
 xlims!(-1.0, 1.0)

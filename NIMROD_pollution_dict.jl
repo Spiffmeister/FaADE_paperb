@@ -123,12 +123,6 @@ for order in [2, 4]
             Pwo = Problem2D(order, u₀, k, k, Dom, BC, source=F, parallel=nothing)
             solnwo = solve(P, Dom, Δt, t_f)
 
-            # T_exact = zeros(eltype(Dom),size(Dom));
-            # T_exact = [zeros(size(Dom.Grids[1])), zeros(size(Dom.Grids[2]))]
-            # for I in eachindex(Dom)
-            #     T_exact[I] = T(Dom.Grids[I]...,soln.t[end])
-            # end
-
             push!(pollution, abs(1 / soln.u[2][1][end, floor(Int, ny / 2)+1] - 1))
 
         end

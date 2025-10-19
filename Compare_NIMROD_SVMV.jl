@@ -22,7 +22,6 @@ k_para = 1e9
 𝒟y = [-0.5, 0.5]
 
 
-# interpmode = :bilinear
 gridoptions = Dict("xbound" => [-0.5, 0.5], "ybound" => [-0.5, 0.5], "xmode" => :stop, "ymode" => :stop)
 interpoptions = Dict("interpolant" => :chs)
 
@@ -66,9 +65,6 @@ MagField(X, t) = [
 # Exact solution
 T(X, t) = (1.0 - exp(-2.0 * π^2 * k_perp * t)) * Ψ(X[1], X[2]) / k_perp # k_perp = 1
 
-# maxthis = 0.5870063248344728
-# texact(t) = (1.0 - exp(-2.0*π^2*t) ) - maxthis
-# find_zero(texact,(0.02,0.1),Bisection())
 
 coord = :Cartesian
 
@@ -276,8 +272,6 @@ lines!(ax2, DomMV1.Grids[1].gridx[end, :], DomMV1.Grids[1].gridy[end, :], region
 
 
 
-# gaxoo = surface!(axo,Dom.gridx[2:end-1,2:end-1], Dom.gridy[2:end-1,2:end-1], region[2:end-1,2:end-1], colormap=:viridis, shading=NoShading)
-# wireframe!(axo, Dom.gridx, Dom.gridy, region, color=(:black,0.1), overdraw=true)
 
 
 Colorbar(axgg[1, 2], limits=colourrange2, ticklabelsize=20, labelsize=20)
@@ -294,7 +288,6 @@ ylims!(ax2, (-0.5, 0.5))
 
 
 hideydecorations!(ax2)
-# hideydecorations!(ax1)
 
 
 
