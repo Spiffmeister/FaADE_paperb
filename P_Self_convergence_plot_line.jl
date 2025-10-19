@@ -131,7 +131,7 @@ function B(X, x::Array{Float64}, params, t)
 end
 dH(X, x, params, t) = B(X, x, params, t)
 
-include("../FieldLines.jl")
+include("./FieldLines.jl")
 poindata = FieldLines.construct_poincare(dH, [0.0, 1.0], [0.0, π], N_trajs=400, N_orbs=400)
 BtoX(r, θ) = [r * cos(θ), r * sin(θ)]
 poinrtheta = hcat([BtoX(poindata.ψ[I], poindata.θ[I]) for I in eachindex(poindata.ψ)]...)
