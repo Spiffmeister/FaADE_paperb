@@ -147,6 +147,6 @@ for order in [2, 4]
 
     df = DataFrame(dictout)
 
-    CSV.write("Paper2/data/Convergence/NIMROD_MV_MMS/NIMROD_MultiBlock_O$(order).csv", df)
+    CSV.write("./data/NIMROD_MultiBlock_O$(order).csv", df)
 
 end

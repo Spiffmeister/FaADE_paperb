@@ -131,5 +131,5 @@ for order in [2, 4]
 
     end
     df = DataFrame(dictout)
-    CSV.write(string("Paper2/data/Convergence/NIMROD_MV_MMS/NBMVAP_O$(order).csv"), df)
+    CSV.write(string("./data/NBMVAP_O$(order).csv"), df)
 end

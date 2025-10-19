@@ -232,7 +232,7 @@ end
 if SaveTests
 
     try
-        mkdir("Paper2/MMSData")
+        mkdir("figs/MMSData")
     catch
     end
 
@@ -268,6 +268,6 @@ if SaveTests
     select!(df, :N, Not(:N)) #Ensure N is the first column
 
 
-    CSV.write("./Paper2/data/MMS_Circle.csv", df)
+    CSV.write("./data/MMS_Circle.csv", df)
 
 end

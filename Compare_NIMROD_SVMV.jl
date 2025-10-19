@@ -296,5 +296,5 @@ hideydecorations!(ax2)
 println("saving")
 
 # f
-# save("2D/Figures/Compare_NIMROD_SVMV.svg", f)
-save("Paper2/data/Compare_NIMROD_SVMV_linear.png", f, px_per_unit=4.0)
+# save("figs/Compare_NIMROD_SVMV.svg", f)
+save("figs/Compare_NIMROD_SVMV_linear.png", f, px_per_unit=4.0)

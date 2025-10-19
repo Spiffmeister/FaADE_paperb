@@ -48,8 +48,8 @@ end
 
 
 filepaths = [
-    string("Paper2/data/Convergence/SingleIslandSelf_2_6_0.1_0.25_0.1"),
-    string("Paper2/data/Convergence/SingleIslandSelf_2_9_0.1_0.25_0.1")
+    string("/data/SingleIslandSelf_2_6_0.1_0.25_0.1"),
+    string("/data/SingleIslandSelf_2_9_0.1_0.25_0.1")
 ]
 
 
@@ -114,7 +114,7 @@ linkaxes!(axf...)
 f
 
 if save_plots
-    save("lines.pdf", f)
+    save("figs/lines.pdf", f)
 end
 
 
@@ -170,7 +170,7 @@ hidexdecorations!(axg, grid=false)
 g
 
 if save_plots
-    save(string(filepaths[2], "/island_tricontour.png"), g, px_per_unit=4)
+    save(string(filepaths[2], "figs/island_tricontour.png"), g, px_per_unit=4)
 end
 
 
@@ -241,5 +241,5 @@ hidexdecorations!(axh, grid=false)
 
 
 if save_plots
-    save(string(filepaths[1], "/island_relerror.png"), g, px_per_unit=4)
+    save(string(filepaths[1], "figs/island_relerror.png"), g, px_per_unit=4)
 end

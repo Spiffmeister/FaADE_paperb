@@ -129,4 +129,4 @@ text!(gridfig_ax2, 1, 1, align=(:right, :top), text=L"\gamma=0.1")
 
 
 # gridfig
-save("Paper2/data/Domain_bowed.pdf", gridfig)
+save("./figs/Domain_bowed.pdf", gridfig)
