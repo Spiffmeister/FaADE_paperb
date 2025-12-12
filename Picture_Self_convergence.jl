@@ -103,7 +103,7 @@ for (fi, filepath) in enumerate(filepaths)
 
     text!(axf[fi], 0, 1, text=L"%$(EXP[fi])", space=:relative, align=(:left, :top), offset=(1, 0), fontsize=22)
     if fi == 1
-        Legend(f[1, 2], li, string.([Doms[I].Grids[4].nx for I in 1:3]))
+        Legend(f[1, 2], li, string.("n=",[Doms[I].Grids[4].nx for I in 1:3]))
     end
 end
 
