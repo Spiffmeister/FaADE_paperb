@@ -26,9 +26,9 @@ D2 = Grid2D(#u->[0.25, -u*0.5 + 0.25], # Bottom
     u -> Tor(u * (θ₁ - θ₂) + θ₂, 0.0), # Top
     n, n)
 
-joints = ((Joint(2,FaADE.Right),),(Joint(1,FaADE.Left),),)
+joints = ((Joint(2, FaADE.Right),), (Joint(1, FaADE.Left),),)
 
-Dom = GridMultiBlock((D1,D2),joints)
+Dom = GridMultiBlock((D1, D2), joints)
 
 
 
@@ -74,11 +74,14 @@ notify(axleg.entrygroups)
 # Place an arrow between the plots
 garrow = f[1, 2] = GridLayout(alignmode=Mixed(top=alignmode_top, bottom=50))
 garrowax = Axis(garrow[1, 1], aspect=DataAspect(), xautolimitmargin=(0, 0), yautolimitmargin=(0, 0))
-poly!(garrowax, Point2f[(0, 0), (0.5, 0), # tail to head
+poly!(garrowax, Point2f[
+        (0, 0), (0.5, 0), # tail to head
         (0.5, -0.1), (0.8, 0.05), (0.5, 0.2), #head
-        (0.5, 0.1), (0, 0.1)], #head to tail
+        (0.5, 0.1), (0, 0.1),
+        (0, 0.2), (-0.3, 0.05), (0, -0.1) #head to tail
+    ],
     color=:black)
-colsize!(f.layout, 2, Relative(1 / 6))
+colsize!(f.layout, 2, Relative(1 / 8))
 hidedecorations!(garrowax)
 hidespines!(garrowax)
 
