@@ -3,7 +3,6 @@
 =#
 
 using LinearAlgebra
-using Revise
 using FaADE
 
 
@@ -129,4 +128,4 @@ text!(gridfig_ax2, 1, 1, align=(:right, :top), text=L"\gamma=0.1")
 
 
 # gridfig
-save("./figs/Domain_bowed.pdf", gridfig)
+save("./data/F_Domain_bowed.pdf", gridfig)

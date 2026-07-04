@@ -4,7 +4,6 @@
 
 using LinearAlgebra
 using JLD2
-using Revise
 using FaADE
 
 
@@ -143,8 +142,6 @@ function comp_MMS(npts,
     end
 
     @show conv_rate = log.(relerr[1:end-1] ./ relerr[2:end]) ./ log.((1 ./ (npts[1:end-1] .- 1)) ./ (1 ./ (npts[2:end] .- 1)))
-    # conv_rate = log2.(relerr[1][1:end-1] ./ relerr[1][2:end], relerr[2][1:end-1] ./ relerr[2][2:end])
-    # @show conv_rate = log2.(relerr[1:end-1] ./ relerr[2:end])
 
     return (comp_soln=comp_soln, MMS_soln=MMS_soln, grids=grids, relerr=relerr, conv_rate=conv_rate, npts=npts)
 end
@@ -231,11 +228,6 @@ end
 
 if SaveTests
 
-    try
-        mkdir("figs/MMSData")
-    catch
-    end
-
     for ord in order, dil in dilation, g0b in inner_bound
         tmp = [Dirichlet_MMS[ord][dil][g0b].comp_soln[I].u for I in eachindex(npts)]
         tmp_mms = [Dirichlet_MMS[ord][dil][g0b].MMS_soln[I] for I in eachindex(npts)]
@@ -251,7 +243,6 @@ if SaveTests
 
     using DataFrames, CSV
     df = DataFrame()
-
 
     headervals = [(ord, dil, g0b) for ord in order, dil in dilation, g0b in inner_bound][:]
     header = vcat(["N "], ["$(ord)_$(dil)_$(g0b)" for ord in order, dil in dilation, g0b in inner_bound][:]...)
