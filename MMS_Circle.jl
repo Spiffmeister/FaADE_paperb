@@ -2,7 +2,6 @@
     MMS for the circular domain
 =#
 
-using LinearAlgebra
 using JLD2
 using FaADE
 
@@ -231,7 +230,7 @@ if SaveTests
     for ord in order, dil in dilation, g0b in inner_bound
         tmp = [Dirichlet_MMS[ord][dil][g0b].comp_soln[I].u for I in eachindex(npts)]
         tmp_mms = [Dirichlet_MMS[ord][dil][g0b].MMS_soln[I] for I in eachindex(npts)]
-        jldsave(string("Paper2/MMSData/MMS_$(ord)_$(g0b)_$(dil)");
+        jldsave(string("./data/MMS_$(ord)_$(g0b)_$(dil)");
             solns=tmp,
             mms_solns=tmp_mms,
             npts=npts

@@ -1,14 +1,10 @@
 #=
     Pictures of the circle domain with a square domain and a bowed domain.
 =#
-
-using LinearAlgebra
+# using GLMakie
+using CairoMakie
 using FaADE
 
-
-
-#====== New solver 4 volume ======#
-println("Curvilinear volume")
 
 
 
@@ -75,10 +71,9 @@ end
 
 
 
-# using GLMakie
-using CairoMakie
 
 
+#=== Generate figure for the circle ===#
 
 nx = ny = 11
 
@@ -87,7 +82,7 @@ Dom0 = buildgrid(nx, ny, 0.0)
 Dom2 = buildgrid(nx, ny, 0.1)
 
 
-gridfig = Figure(size=(1200, 600), fontsize=20)
+gridfig = Figure(size=(1200, 600), fontsize=25)
 
 gridfig_gg = gridfig[1, 1] = GridLayout()
 
@@ -96,18 +91,20 @@ gridfig_ax2 = Axis(gridfig_gg[1, 2], xlabel="R")
 
 dg = []
 
+# Outline of exterior volumes
 for I in 1:5
     wireframe!(gridfig_ax1, Dom0.Grids[I].gridx, Dom0.Grids[I].gridy, zeros(nx, ny))
     push!(dg, wireframe!(gridfig_ax2, Dom2.Grids[I].gridx, Dom2.Grids[I].gridy, zeros(nx, ny)))
 end
 
+# Outline of exterior volumes
 for I in 2:5
     lines!(gridfig_ax1, Dom0.Grids[I].gridx[:, 1], Dom0.Grids[I].gridy[:, 1], color=(:black, 0.7))
     lines!(gridfig_ax1, Dom0.Grids[I].gridx[end, :], Dom0.Grids[I].gridy[end, :], color=(:black, 0.7))
     lines!(gridfig_ax1, Dom0.Grids[I].gridx[:, end], Dom0.Grids[I].gridy[:, end], color=(:black, 0.7))
 end
 
-
+# Outline of exterior volumes
 for I in 2:5
     lines!(gridfig_ax2, Dom2.Grids[I].gridx[:, 1], Dom2.Grids[I].gridy[:, 1], color=(:black, 0.7))
     lines!(gridfig_ax2, Dom2.Grids[I].gridx[end, :], Dom2.Grids[I].gridy[end, :], color=(:black, 0.7))
@@ -127,5 +124,5 @@ text!(gridfig_ax2, 1, 1, align=(:right, :top), text=L"\gamma=0.1")
 
 
 
-# gridfig
+# Safe figure to ./data/ folder
 save("./data/F_Domain_bowed.pdf", gridfig)

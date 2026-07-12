@@ -1,5 +1,6 @@
-using LinearAlgebra
 
+# using GLMakie
+using CairoMakie
 using FaADE
 
 
@@ -39,8 +40,6 @@ D22 = Grid2D([0.0, 1.0], [0.0, 1.0], 11, 11)
 #### FIGURE
 
 
-# using GLMakie
-using CairoMakie
 
 
 alignmode_top = 0
@@ -128,6 +127,6 @@ colgap!(f.layout, 1, 5.0)
 colgap!(f.layout, 2, 5.0)
 
 resize_to_layout!(f)
-# f
 
+# Save to ./data/
 save("./data/F_Domain_doubleseashell.pdf", f, px_per_unit=8)

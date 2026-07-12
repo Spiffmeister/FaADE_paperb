@@ -1,18 +1,16 @@
 
-using Revise
 using FaADE
 using LinearAlgebra
 using JLD2
 using DelaunayTriangulation
 using CubicHermiteSpline
+using SPECReader
 
 using GLMakie
 using CairoMakie
 
 GLMakie.activate!()
 
-include("../SPEC/readspec.jl")
-using .readspec
 
 
 
@@ -45,10 +43,10 @@ coord = :Curvilinear
 
 
 
-speceq = readspec.SPECEquilibrium("data/G3V01L0Fi.002.sp.h5")
+speceq = SPECEquilibrium("data/G3V01L0Fi.002.sp.h5")
 
-specboundary = readspec.get_boundary(speceq, 1)
-specaxis = readspec.get_axis(speceq)
+specboundary = get_boundary(speceq, 1)
+specaxis = get_axis(speceq)
 
 @show "CREATE GRIDS"
 
@@ -159,10 +157,10 @@ BD = Dict(2 => (Dr,), 3 => (Du,), 4 => (Dl,), 5 => (Dd,))
 @show "PARALLEL MAP"
 
 
-dH(X, x, params, t) = readspec.field_line!(X, t, x, speceq)
+dH(X, x, params, t) = field_line!(X, t, x, speceq)
 
-XtoB(x, y) = readspec.find_sθζ((x, y), 0.0, speceq, 1)
-BtoX(r, θ) = readspec.get_RZ(r, θ, 0.0, speceq, 1)
+XtoB(x, y) = find_sθζ((x, y), 0.0, speceq, 1)
+BtoX(r, θ) = get_RZ(r, θ, 0.0, speceq, 1)
 
 gridoptions = Dict("coords" => (XtoB, BtoX))
 
@@ -176,8 +174,8 @@ intercept(u, x, y, t) = begin
     end
 end
 
-savedir_grid = "Paper2/data/SPEC_Case_n$(D1.nx)_$(D2.ny)/"
-savedir = "Paper2/data/SPEC_Case_n$(D1.nx)_$(D2.ny)_$(Δt)_$(t_f)/"
+savedir_grid = "./data/SPEC_Case_n$(D1.nx)_$(D2.ny)/"
+savedir = "./data/SPEC_Case_n$(D1.nx)_$(D2.ny)_$(Δt)_$(t_f)/"
 if !isdir(savedir)
     mkdir(savedir)
 end
@@ -205,8 +203,8 @@ end
 
 
 function magfield(X, t)
-    s, θ = readspec.find_sθζ(X, 0.0, speceq, 1)
-    return readspec.get_Bfield(s, θ, 0.0, speceq)
+    s, θ = find_sθζ(X, 0.0, speceq, 1)
+    return get_Bfield(s, θ, 0.0, speceq)
 end
 
 interpotions = Dict("interpolant" => :chs, "intercept" => intercept)
@@ -221,7 +219,7 @@ PData = FaADE.ParallelOperator.ParallelMultiBlock(gdata, Dom, order, κ=k_para, 
 
 inset = 0.9
 function source_interp(X)
-    s = readspec.find_sθζ(X, 0.0, speceq, 1)[1]
+    s = find_sθζ(X, 0.0, speceq, 1)[1]
     s = (s + 1) / 2 # s ∈ [-1,1] → [0,1]
     tmp = 4 * (1 - s^2)^8
     if (inset - s) > 0
@@ -281,7 +279,7 @@ for I in 1:5
 end
 
 
-poinout = readspec.ReadPoincare("./Paper2/data/G3V01L0Fi.002.sp.h5")
+poinout = ReadPoincare("./data/G3V01L0Fi.002.sp.h5")
 
 scatter!(axf, poinout["R"][1, :, :][:], poinout["Z"][1, :, :][:], markersize=4, color=(:red), overdraw=true)
 

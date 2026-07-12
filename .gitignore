@@ -1,2 +1,7 @@
 *Manifest.toml
 *.pdf
+*.csv
+data/MMS*
+data/*/
+data/SISC*
+*.png
