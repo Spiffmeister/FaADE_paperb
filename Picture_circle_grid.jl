@@ -119,8 +119,8 @@ hideydecorations!(gridfig_ax2, grid=false)
 
 Legend(gridfig[1, 2], dg[:], [L"D_1", L"D_2", L"D_3", L"D_4", L"D_5"])
 
-text!(gridfig_ax1, 1, 1, align=(:right, :top), text=L"\gamma=0")
-text!(gridfig_ax2, 1, 1, align=(:right, :top), text=L"\gamma=0.1")
+text!(gridfig_ax1, 1, 1, align=(:right, :center), text=L"\gamma=0", fontsize=40)
+text!(gridfig_ax2, 1, 1, align=(:right, :center), text=L"\gamma=0.1", fontsize=40)
 
 
 
