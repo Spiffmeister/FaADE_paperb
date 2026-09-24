@@ -11,4 +11,4 @@ SPECReader = "0b5e1f4c-4755-4775-bc20-dc99ea6f75ff"
 Surrogates = "6fc51010-71bc-11e9-0e15-a3fcc6593c49"
 
 [sources]
-FaADE = {url = "https://github.com/Spiffmeister/FaADE.jl/tree/v0.3.0"}
+FaADE = {url = "https://github.com/Spiffmeister/FaADE.jl", rev="v0.3.0"}
